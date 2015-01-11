@@ -29,7 +29,7 @@ class modContentMapDistanceHelper
         $option = $jinput->getCmd('option','');
         $view = $jinput->getCmd('view');
         // Initialise variables.
-        if($view != 'article' && $option != 'com_content' )
+        if($view != 'article' || $option != 'com_content' )
         {
             return;
         }
