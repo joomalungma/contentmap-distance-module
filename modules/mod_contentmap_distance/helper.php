@@ -31,7 +31,7 @@ class modContentMapDistanceHelper
         // Initialise variables.
         if($view != 'article' || $option != 'com_content' )
         {
-            return;
+            return array();
         }
         $numberOfResults		= (int) $params->get('numberOfResults',10);
         $units		= (int)$params->get('units',1);
