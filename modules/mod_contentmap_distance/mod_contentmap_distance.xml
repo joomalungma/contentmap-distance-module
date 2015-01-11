@@ -11,16 +11,15 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>info@joomalungma.com</authorEmail>
 	<authorUrl>http://joomalungma.com</authorUrl>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<description>MOD_CONTENTMAP_DISTANCE_XML_DESCRIPTION</description>
-	<files>
+	<files folder="modules/mod_contentmap_distance">
 		<filename module="mod_contentmap_distance">mod_contentmap_distance.php</filename>
 		<folder>tmpl</folder>
 		<folder>language</folder>
 		<filename>helper.php</filename>
 		<filename>index.html</filename>
-        <filename>mod_contentmap_distance.xml</filename>
-	</files>
+    </files>
 	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_MENU" />
 	<config>
 		<fields name="params">
