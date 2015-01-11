@@ -26,8 +26,13 @@ class modContentMapDistanceHelper
 	{
         $jinput = JFactory::getApplication()->input;
         $aid = $jinput->get('id','','INT');
-
+        $option = $jinput->getCmd('option','');
+        $view = $jinput->getCmd('view');
         // Initialise variables.
+        if($view != 'article' && $option != 'com_content' )
+        {
+            return;
+        }
         $numberOfResults		= (int) $params->get('numberOfResults',10);
         $units		= (int)$params->get('units',1);
         $distance_unit = ($units == 0) ? JText::_("km") : JText::_("miles");
@@ -49,7 +54,9 @@ class modContentMapDistanceHelper
 
         $db			= JFactory::getDbo();
         $article = new JTableContent($db);
-        foreach(array_slice($distances, 0, $numberOfResults, true) as $key => $value) {
+        $resultDistances = $numberOfResults ? array_slice($distances, 0, $numberOfResults, true) : $distances;
+        foreach($resultDistances as $key => $value)
+        {
             $article->load($key);
             $result[$key]['link'] = JRoute::_('index.php?option=com_content&amp;view=article&amp;id='.$key.':'.$article->alias.'&amp;catid='.$article->catid);
             $result[$key]['distance'] = round($value, 1) . ' ' . $distance_unit;
@@ -87,7 +94,6 @@ class modContentMapDistanceHelper
         $my_lattitude = $currArticleCoordinat[0];
         $my_longitude = $currArticleCoordinat[1];
         unset ($coords[$aid]);
-
 
         // From now on, we have a filtered associated list ($coords) with id=>coordinates
         // and the current article's lattitude and longitude
