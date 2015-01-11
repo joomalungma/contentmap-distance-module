@@ -31,7 +31,6 @@ class modContentMapDistanceHelper
 		if (!($result = $cache->get($key)))
 		{
 			// Initialise variables.
-			$list		= array();
 			$db			= JFactory::getDbo();
 
 			$numberOfResults		= (int) $params->get('numberOfResults',10);
@@ -78,8 +77,6 @@ class modContentMapDistanceHelper
             }
 
             asort($distances);
-
-            $i = 0;
             $result = array();
             if(version_compare(JVERSION,3) > 0)
             {
@@ -91,9 +88,7 @@ class modContentMapDistanceHelper
             }
 
             $article = new JTableContent($db);
-
-            foreach($distances as $key => $value) {
-                if ($i == $numberOfResults){break;}
+            foreach(array_slice($distances, 0, $numberOfResults, true) as $key => $value) {
                 $article->load($key);
                 $result[$key]['link'] = JRoute::_('index.php?option=com_content&amp;view=article&amp;id='.$key.':'.$article->alias.'&amp;catid='.$article->catid);
                 $result[$key]['distance'] = round($value, 1) . ' ' . $distance_unit;
